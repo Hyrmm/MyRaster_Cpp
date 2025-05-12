@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="core\raster.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="math\matrix.cpp" />
     <ClCompile Include="math\vector.cpp" />
     <ClCompile Include="model\objModel.cpp" />
   </ItemGroup>
