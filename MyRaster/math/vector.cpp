@@ -1,4 +1,4 @@
-#include <cmath>
+﻿#include <cmath>
 #include "./vector.h"
 
 Vec3::Vec3(float x, float y, float z) :x(x), y(y), z(z) {}

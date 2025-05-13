@@ -1,21 +1,10 @@
-#pragma once
+﻿#pragma once
 #include <vector>
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <iostream>
-
-struct Vertex {
-	float x, y, z;
-};
-
-struct TextureCoord {
-	float u, v;
-};
-
-struct Normal {
-	float x, y, z;
-};
+#include "../math/vector.h"
 
 struct Face {
 	std::vector<int> vertexIndices;
@@ -25,9 +14,9 @@ struct Face {
 
 class OBJModel {
 public:
-	std::vector<Vertex> vertices;
-	std::vector<TextureCoord> textureCoords;
-	std::vector<Normal> normals;
+	std::vector<Vec3> vertices;
+	std::vector<Vec3> textureCoords;
+	std::vector<Vec3> normals;
 	std::vector<Face> faces;
 
 	bool loadFromFile(const std::string& filename);

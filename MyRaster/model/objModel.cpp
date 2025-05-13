@@ -1,4 +1,4 @@
-#include "objModel.h"
+ï»¿#include "objModel.h"
 
 bool OBJModel::loadFromFile(const std::string& filename) {
 	std::ifstream file(filename);
@@ -9,26 +9,31 @@ bool OBJModel::loadFromFile(const std::string& filename) {
 
 	std::string line;
 	while (std::getline(file, line)) {
+
 		std::istringstream iss(line);
 		std::string type;
+
 		iss >> type;
 
-		if (type == "v") {  // ¶¥µãÊı¾İ
-			Vertex vertex;
-			iss >> vertex.x >> vertex.y >> vertex.z;
+		if (type == "v") {  // é¡¶ç‚¹æ•°æ®
+			float x, y, z;
+			iss >> x >> y >> z;
+			Vec3 vertex(x, y, z);
 			vertices.push_back(vertex);
 		}
-		else if (type == "vt") {  // ÎÆÀí×ø±ê
-			TextureCoord texCoord;
-			iss >> texCoord.u >> texCoord.v;
+		else if (type == "vt") {  // çº¹ç†åæ ‡
+			float u, v;
+			iss >> u >> v;
+			Vec3 texCoord(u, v, 0.0f);
 			textureCoords.push_back(texCoord);
 		}
-		else if (type == "vn") {  // ·¨Ïß
-			Normal normal;
-			iss >> normal.x >> normal.y >> normal.z;
+		else if (type == "vn") {  // æ³•çº¿
+			float x, y, z;
+			iss >> x >> y >> z;
+			Vec3 normal(x, y, z);
 			normals.push_back(normal);
 		}
-		else if (type == "f") {  // ÃæÊı¾İ
+		else if (type == "f") {  // é¢æ•°æ®
 			Face face;
 			std::string vertexStr;
 
@@ -36,19 +41,19 @@ bool OBJModel::loadFromFile(const std::string& filename) {
 				std::istringstream viss(vertexStr);
 				std::string token;
 
-				// ½âÎö¶¥µãË÷Òı
+				// è§£æé¡¶ç‚¹ç´¢å¼•
 				std::getline(viss, token, '/');
 				if (!token.empty()) {
-					face.vertexIndices.push_back(std::stoi(token) - 1);  // OBJË÷Òı´Ó1¿ªÊ¼
+					face.vertexIndices.push_back(std::stoi(token) - 1);  // OBJç´¢å¼•ä»1å¼€å§‹
 				}
 
-				// ½âÎöÎÆÀí×ø±êË÷Òı
+				// è§£æçº¹ç†åæ ‡ç´¢å¼•
 				std::getline(viss, token, '/');
 				if (!token.empty()) {
 					face.textureIndices.push_back(std::stoi(token) - 1);
 				}
 
-				// ½âÎö·¨ÏßË÷Òı
+				// è§£ææ³•çº¿ç´¢å¼•
 				std::getline(viss, token, '/');
 				if (!token.empty()) {
 					face.normalIndices.push_back(std::stoi(token) - 1);

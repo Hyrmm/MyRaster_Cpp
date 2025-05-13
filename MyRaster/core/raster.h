@@ -1,11 +1,17 @@
-#pragma once
+﻿#pragma once
 #include "../model/objModel.h"
+#include "../math/matrix.h"
 
 class Raster
 {
 private:
 	int* frameBuffer;
 	int width, height;
+
+	Matrix44 modelMatrix;
+	Matrix44 viewMatrix;
+	Matrix44 projectionMatrix;
+	Matrix44 viewportMatrix;
 
 	OBJModel* model;
 
